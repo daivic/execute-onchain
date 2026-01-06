@@ -33,12 +33,17 @@ TENDERLY_BASE_RPC_URL="https://base.gateway.tenderly.co/2KIuvXWOTbm2w0ijKVprJ" n
 ```
 
 Notes:
+
 - The provided gateway URL is for **Base mainnet** (simulation is disabled if you select Base Sepolia).
 - If you prefer, you can also put that env var into an `.env.local` file (not committed).
+
+## Deployment
+
+This app is intended to be served at **`/execute/`** on `daivic.com`.
+
+It’s deployed by the **`daivic-web`** GitHub Pages workflow, which builds this repo and publishes it into the main site’s `dist/execute/` directory.
 
 ## Safety notes
 
 - This sends **raw calldata**. Double-check the `to` address + `data` + `value` before confirming.
 - Prefer testing on **Base Sepolia** first if you’re unsure.
-
-

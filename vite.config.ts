@@ -7,6 +7,17 @@ export default defineConfig(({ mode }) => {
     process.env.TENDERLY_BASE_RPC_URL ?? env.TENDERLY_BASE_RPC_URL
   )?.trim();
 
+  const normalizeBasePath = (value: string | undefined) => {
+    if (!value) return "/";
+    const trimmed = value.trim();
+    if (!trimmed) return "/";
+    const withLeading = trimmed.startsWith("/") ? trimmed : `/${trimmed}`;
+    return withLeading.endsWith("/") ? withLeading : `${withLeading}/`;
+  };
+
+  const base = normalizeBasePath(process.env.BASE_PATH);
+  const outDir = process.env.OUT_DIR?.trim();
+
   const proxy: Record<string, any> = {};
   if (tenderlyBaseRpcUrl) {
     const url = new URL(tenderlyBaseRpcUrl);
@@ -19,7 +30,14 @@ export default defineConfig(({ mode }) => {
   }
 
   return {
+    base,
     plugins: [react()],
+    build: outDir
+      ? {
+          outDir,
+          emptyOutDir: true,
+        }
+      : undefined,
     server: {
       proxy,
     },

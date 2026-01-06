@@ -108,6 +108,19 @@ h1 {
   appearance: none;
 }
 
+.bubbleLogo {
+  padding: 0;
+  width: 42px;
+  justify-content: center;
+}
+
+.baseLogoImg {
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  display: block;
+}
+
 .bubbleLabel {
   font-size: 11px;
   color: var(--faint);

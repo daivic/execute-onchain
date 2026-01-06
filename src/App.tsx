@@ -471,6 +471,14 @@ export default function App() {
     <div className="page">
       <div className="container">
         <div className="bubbleBar">
+          <div className="bubble bubbleLogo" title="Base">
+            <img
+              className="baseLogoImg"
+              src={`${import.meta.env.BASE_URL}base-logo-square.svg`}
+              alt="Base"
+            />
+          </div>
+
           <button
             className={`bubble bubbleButton ${
               activeBubble === "wallet" ? "bubbleActive" : ""
