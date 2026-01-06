@@ -39,9 +39,14 @@ Notes:
 
 ## Deployment
 
-This app is intended to be served at **`/execute/`** on `daivic.com`.
+This app is intended to be served at **`/execute/`** on `daivic.com` (deployed by `daivic-web`).
 
-It’s deployed by the **`daivic-web`** GitHub Pages workflow, which builds this repo and publishes it into the main site’s `dist/execute/` directory.
+It can also be deployed as a standalone project pages site at `https://daivic.github.io/execute-onchain/` via:
+
+```bash
+npm install
+npm run deploy
+```
 
 ## Safety notes
 
