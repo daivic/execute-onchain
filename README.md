@@ -24,18 +24,22 @@ Then open the local URL Vite prints (usually `http://localhost:5173`).
 
 ## Tenderly simulation
 
-The UI has a **Simulate (Tenderly)** button that calls Tenderly Gateway via a local Vite dev proxy.
+The UI has a **Simulate (Tenderly)** button that uses Tenderly's **Simulation API** in **full** mode and saves simulations so they show up in your Tenderly dashboard and in the app's **Recent Activity** list.
 
-Run the dev server with the gateway URL set:
+Run the dev server with Tenderly credentials set (recommended via `.env.local`, not committed):
 
 ```bash
-TENDERLY_BASE_RPC_URL="https://base.gateway.tenderly.co/2KIuvXWOTbm2w0ijKVprJ" npm run dev
+TENDERLY_ACCESS_KEY="..." \
+TENDERLY_ACCOUNT_SLUG="..." \
+TENDERLY_PROJECT_SLUG="..." \
+npm run dev
 ```
 
 Notes:
 
-- The provided gateway URL is for **Base mainnet** (simulation is disabled if you select Base Sepolia).
-- If you prefer, you can also put that env var into an `.env.local` file (not committed).
+- The app currently simulates only when you're on **Base mainnet**.
+- These env vars are used only by the **Vite dev server proxy** (`/tenderly-api/*`), so the browser never sees your `X-Access-Key`.
+- If you deploy this as a static site, you'll need your own backend/proxy to call Tenderly's API securely.
 
 ## Deployment
 

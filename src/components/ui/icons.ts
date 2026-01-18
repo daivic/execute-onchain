@@ -1,0 +1,35 @@
+// Central icon adapter.
+// We keep the existing lucide-style icon names used throughout the app,
+// but re-export Phosphor icons (duotone defaults are set via IconContext in `main.tsx`).
+export {
+  // App + panels
+  WarningCircle as AlertCircle,
+  CircleNotch as Loader2,
+  Play,
+  ArrowCounterClockwise as RotateCcw,
+  PaperPlaneTilt as Send,
+  Clock,
+  ArrowSquareOut as ExternalLink,
+  Trash as Trash2,
+  Wallet,
+  CaretDown as ChevronDown,
+  SignOut as LogOut,
+  Copy,
+  CheckCircle as CheckCircle2,
+  Tray as Inbox,
+  Pulse as Activity,
+  Lightning as Zap,
+  ChatText as MessageSquare,
+  ArrowsLeftRight as ArrowRightLeft,
+  TrendUp as TrendingUp,
+  Coins,
+  MagnifyingGlass as Search,
+  TreeStructure as ListTree,
+  QuestionMark as HelpCircle,
+  // shadcn primitives
+  Check,
+  CaretRight as ChevronRight,
+  Circle,
+  X,
+  DotsSixVertical as GripVertical,
+} from "@phosphor-icons/react";

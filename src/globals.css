@@ -1,0 +1,319 @@
+/* Tailwind directives - inject Tailwind's generated styles */
+@tailwind base; /* Reset + base element styles */
+@tailwind components; /* Component classes (cards, buttons, etc.) */
+@tailwind utilities; /* Utility classes (flex, p-4, text-sm, etc.) */
+
+@layer base {
+  :root {
+    /* 
+     * Foundation warm palette (cream/terracotta/browns)
+     * Semantic foundation vars that drive all shadcn tokens
+     */
+
+    /* Neutral ramp: cream → sand → taupe (a bit warmer / less gray) */
+    --neutral-50: 38 60% 98%;
+    --neutral-100: 38 55% 96%;
+    --neutral-200: 37 48% 92%;
+    --neutral-300: 36 38% 86%;
+    --neutral-400: 35 28% 74%;
+    --neutral-500: 30 16% 54%;
+    --neutral-600: 30 18% 40%;
+    --neutral-700: 30 20% 30%;
+    --neutral-800: 28 24% 20%;
+    --neutral-900: 28 26% 12%;
+
+    /* Brand accent: terracotta (deeper / earthier) */
+    --brand-hue: 18;
+    --brand-saturation: 82%;
+    --brand-lightness: 44%;
+    --brand-shadow-lightness: 30%;
+
+    /* Secondary warm accent: copper/amber (deeper) */
+    --accent-hue: 28;
+    --accent-saturation: 95%;
+    --accent-lightness: 48%;
+    --accent-shadow-lightness: 34%;
+
+    /* Danger: warm red (slightly desaturated for harmony) */
+    --danger-hue: 5;
+    --danger-saturation: 70%;
+    --danger-lightness: 55%;
+
+    /* Success: warm olive-green */
+    --success-hue: 85;
+    --success-saturation: 45%;
+    --success-lightness: 40%;
+
+    /* Warning: honey/amber */
+    --warning-hue: 38;
+    --warning-saturation: 85%;
+    --warning-lightness: 50%;
+
+    /*
+     * shadcn/ui theme tokens mapped to foundation palette
+     * (Raw HSL values; Tailwind wraps with hsl() so opacity utilities like /20 work.)
+     */
+
+    /* Page background and text */
+    --background: var(--neutral-100);
+    --foreground: var(--neutral-900);
+
+    /* Card surfaces */
+    --card: var(--neutral-50);
+    --card-foreground: var(--neutral-900);
+
+    /* Popover/dropdown surfaces */
+    --popover: var(--neutral-50);
+    --popover-foreground: var(--neutral-900);
+
+    /* Primary action color (terracotta) */
+    /* Overridden to match dark mode orange: 24.6 95% 53.1% */
+    --primary: 24.6 95% 53.1%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary/subtle actions */
+    --secondary: var(--neutral-300);
+    --secondary-foreground: var(--neutral-900);
+
+    /* Muted/disabled elements */
+    --muted: var(--neutral-300);
+    --muted-foreground: var(--neutral-600);
+
+    /* Accent (hover states, highlights) */
+    --accent: var(--neutral-300);
+    --accent-foreground: var(--neutral-900);
+
+    /* Destructive/error states */
+    --destructive: var(--danger-hue) var(--danger-saturation)
+      var(--danger-lightness);
+    --destructive-foreground: 0 0% 100%;
+
+    /* Status colors */
+    --success: var(--success-hue) var(--success-saturation)
+      var(--success-lightness);
+    --success-foreground: 0 0% 100%;
+    --warning: var(--warning-hue) var(--warning-saturation)
+      var(--warning-lightness);
+    --warning-foreground: 0 0% 100%;
+    --info: var(--accent-hue) var(--accent-saturation) var(--accent-lightness);
+    --info-foreground: 0 0% 100%;
+    --tenderly: var(--accent-hue) var(--accent-saturation)
+      var(--accent-lightness);
+    --tenderly-foreground: 0 0% 100%;
+
+    /* Button "drop" shadow colors (used for 3D pressed effect) */
+    --shadow-primary: hsl(
+      var(--brand-hue) var(--brand-saturation) var(--brand-shadow-lightness) /
+        0.55
+    );
+    --shadow-tenderly: hsl(
+      var(--accent-hue) var(--accent-saturation) var(--accent-shadow-lightness) /
+        0.55
+    );
+    --shadow-neutral: hsl(var(--neutral-900) / 0.4);
+    --shadow-destructive: hsl(var(--destructive) / 0.45);
+
+    /* Borders and inputs */
+    --border: var(--neutral-400);
+    --input: var(--neutral-300);
+    --ring: 24.6 95% 53.1%;
+
+    /* Custom surfaces */
+    --text-background: var(--neutral-50);
+    --toolbar-background: var(--primary);
+    --history-background: var(--neutral-50);
+
+    /* Border radius */
+    --radius: 10px;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  /* Apply border color to all elements */
+  * {
+    @apply border-border;
+  }
+
+  /* Base body styles */
+  body {
+    @apply bg-background text-foreground antialiased;
+    position: relative;
+    isolation: isolate;
+    /* Papery base tone + subtle warm vignettes (grain comes from ::before) */
+    background-image: radial-gradient(
+        at 0% 0%,
+        hsl(var(--background) / 0.85) 0,
+        transparent 60%
+      ),
+      radial-gradient(
+        at 100% 0%,
+        hsl(var(--background) / 0.08) 0,
+        transparent 58%
+      ),
+      radial-gradient(
+        at 100% 100%,
+        hsl(var(--primary) / 0.09) 0,
+        transparent 60%
+      ),
+      radial-gradient(at 0% 100%, hsl(var(--primary) / 0.05) 0, transparent 62%),
+      linear-gradient(
+        180deg,
+        hsl(var(--primary) / 0.35) 0%,
+        transparent 45%,
+        hsl(var(--background) / 0.03) 100%
+      );
+    background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
+    background-attachment: fixed;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.18;
+    z-index: 0;
+    pointer-events: none;
+    mix-blend-mode: multiply;
+  }
+
+  body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.12;
+    z-index: 0;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+    background-image: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 1px,
+        rgba(0, 0, 0, 0.03) 1px,
+        rgba(0, 0, 0, 0.03) 2px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 1px,
+        rgba(0, 0, 0, 0.02) 1px,
+        rgba(0, 0, 0, 0.02) 2px
+      );
+    background-size: 100% 4px, 4px 100%;
+  }
+
+  #root {
+    position: relative;
+    z-index: 1;
+  }
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 24.6 95% 53.1%;
+    --primary-foreground: 240 5.9% 10%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 24.6 95% 53.1%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 24.6 95% 53.1%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 24.6 95% 53.1%;
+  }
+}
+
+@layer utilities {
+  .gradient-border-accent {
+    position: relative;
+  }
+
+  .gradient-border-accent::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      90deg,
+      hsl(var(--primary) / 0.85),
+      hsl(var(--tenderly) / 0.85),
+      hsl(var(--warning) / 0.85)
+    );
+    -webkit-mask: linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .gradient-border-accent-strong {
+    position: relative;
+  }
+
+  .gradient-border-accent-strong::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 2px;
+    background: linear-gradient(
+      90deg,
+      hsl(var(--primary) / 0.9),
+      hsl(var(--tenderly) / 0.9),
+      hsl(var(--warning) / 0.85)
+    );
+    -webkit-mask: linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-muted-foreground/20 rounded-full hover:bg-muted-foreground/40 transition-colors;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border transition-colors duration-300;
+  }
+  body {
+    @apply bg-background text-foreground transition-colors duration-300;
+  }
+}
