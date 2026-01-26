@@ -34,10 +34,11 @@ jobs:
       - name: Install
         run: npm ci
 
-      - name: Build (served at /execute-onchain/)
+      - name: Build
         run: npm run build
         env:
-          BASE_PATH: /execute-onchain/
+          VITE_TENDERLY_ACCOUNT_SLUG: ${{ vars.VITE_TENDERLY_ACCOUNT_SLUG }}
+          VITE_TENDERLY_PROJECT_SLUG: ${{ vars.VITE_TENDERLY_PROJECT_SLUG }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
